@@ -1,0 +1,190 @@
+.page-wrapper {
+    direction: rtl;
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.title-text {
+    color: #88c4b4; /* טורקיז מהתמונה */
+    text-align: center;
+    font-size: 2.8rem;
+    margin-bottom: 5px;
+    font-weight: 300;
+}
+
+.blue-divider {
+    height: 2px;
+    background-color: #2e6fa7; /* קו כחול כהה */
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+}
+
+/* סגנון הכרטיסיות הלבנות עם הצללית */
+.card-style {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.filter-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.filter-row input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    background-color: #fcfcfc;
+}
+
+.search-button {
+    background-color: #2e6fa7;
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* הטבלה המינימליסטית */
+.modern-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.modern-table th {
+    text-align: right;
+    padding: 12px;
+    border-bottom: 2px solid #f0f0f0;
+    color: #000;
+    font-weight: 800;
+}
+
+.modern-table td {
+    padding: 15px 12px;
+    border-bottom: 1px solid #f7f7f7;
+}
+
+.status-link {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+.status-msg {
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 50px;
+}
+
+.status-link {
+    text-decoration: none;
+    font-weight: bold;
+    padding: 4px 8px; /* ריווח קטן מסביב לטקסט */
+}
+
+.status-link.waiting {
+    color: #88c4b4; /* טורקיז */
+}
+
+.status-link.reject {
+    color: #b40909; /* אדום ברור לאותיות */
+}
+
+.status-link.allow {
+    color: #22794e; /* ירוק */
+}
+
+
+/* ביטול שינוי הרקע של השורה עבור הקישור הספציפי */
+.status-link.reject:hover {
+    background-color: transparent !important; /* מבטל את צבע הרקע */
+    text-decoration: underline; /* משאיר רק קו תחתון אם רוצים */
+    color: #b40909; /* שומר על הצבע האדום של האותיות */
+}
+
+/* אם הבעיה היא שהשורה כולה נהיית כהה וזה מפריע לך לראות את האדום */
+table tr:hover .status-link.reject {
+    background-color: transparent;
+}
+
+/* סידור הקונטיינר שעוטף את הטבלה */
+.table-container {
+    width: 100%;
+    padding: 0; /* ביטול פאדינג שעלול לכווץ את הטבלה */
+}
+
+table {
+    width: 100%; /* מריחת הטבלה לכל רוחב הכרטיס הלבן */
+    border-collapse: collapse;
+    direction: rtl;
+    table-layout: fixed; /* עוזר בחלוקה שווה של העמודות */
+}
+
+/* עיצוב הכותרות - כחול, לכל הרוחב, בלי רקע ירוק */
+table th {
+    background-color: transparent !important; /* ביטול הרקע הירוק סופית */
+    color: rgb(4, 111, 193) !important; /* צבע כחלחל מקצועי */
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 2px solid #f0f0f0; /* קו עדין מפריד */
+}
+
+/* עיצוב התאים - שיהיו מסונכרנים בדיוק מתחת לכותרות */
+table td {
+    padding: 15px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* ביטול הגדרות ישנות שעלולות להפריע */
+.modern-table th {
+    width: auto; /* מאפשר חלוקה שווה */
+}
+
+
+
+/* מבנה הטבלה הכללי */
+table {
+    width: 100% !important; /* מתיחה לכל רוחב הקונטיינר */
+    border-collapse: collapse;
+    direction: rtl;
+    table-layout: fixed; /* קריטי: מחלק את העמודות באופן שווה ומדויק */
+}
+
+/* עיצוב הכותרות */
+table th {
+    color: rgb(4, 111, 193) !important; /* הצבע הכחול שביקשת */
+    padding: 15px 5px;
+    text-align: center;
+    border-bottom: 2px solid #f0f0f0;
+    width: auto; /* ביטול רוחב קבוע אם הוגדר */
+}
+
+/* עיצוב התאים (הנתונים) */
+table td {
+    padding: 15px 5px;
+    text-align: center;
+    border-bottom: 1px solid #f7f7f7;
+    word-wrap: break-word; /* מונע מטקסט ארוך להרוס את העמודה */
+}
+
+/* ביטול הגדרות קודמות שעלולות להפריע */
+td, th {
+    min-width: 0; 
+}
