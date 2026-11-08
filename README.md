@@ -1,75 +1,62 @@
-# סטודנטק (Studentec) — מערכת ניהול מלגות וסטודנטים
+# Studentec — Student Grant Management System
 
-מערכת Full-Stack מתקדמת לניהול הרשמה של סטודנטים, הגשת בקשות למלגות, מעקב אחר סטטוסים וניהול בקשות מתקדם עבור מנהלי המערכת. 
+A full-stack system for student registration, grant request submission, status tracking, and advanced request management for administrators.
 
-המערכת כוללת צד לקוח ב-React (עם Redux Toolkit) וצד שרת מבוסס Node.js ו-Express עם מסד נתונים MongoDB.
+The client is built with React and Redux Toolkit; the server uses Node.js and Express with a MongoDB database.
 
-## הרעיון המרכזי
+<!-- Add a screenshot or short GIF here -->
+<!-- ![Studentec demo](docs/demo.gif) -->
 
-המערכת מספקת פלטפורמה אחודה לסטודנטים המעוניינים להגיש בקשות למלגות בהייטק ולעקוב אחר אישורן, תוך מתן כלים רחבים למנהלים לסנן, למיין ולנהל את הבקשות בצורה חכמה ומדויקת:
+## Overview
 
-1. **ניהול משתמשים מאובטח**: 
-הרשמה והתחברות עם ולידציות מלאות (תעודת זהות ייחודית, אורך תווים וסיסמאות) ומניעת התנגשויות נתונים בין משתמשים.
+Students submit tech scholarship requests and follow their approval. Administrators get tools to filter, sort and manage requests precisely.
 
-2. **טופס בקשה רב-שלבי (Multi-Step Form)**: 
-איסוף נתונים מפורט הכולל פרטים אישיים, משפחתיים, לימודיים ובנקאיים, לצד העלאת קבצים נדרשים (צילום תעודת זהות, אישור לימודים ואישור בנק) באמצעות Multer.
+- **Secure user management:** registration and login with full validation (unique ID number, length limits, password rules) and prevention of data conflicts between users.
+- **Multi-step request form:** collects personal, family, academic and banking details, plus required documents (ID copy, study confirmation, bank confirmation) uploaded with Multer.
+- **Admin dashboard:** advanced filtering by city, dates, number of siblings and salary range, dynamic sorting, and updating request status (waiting, allowed, rejected).
 
-3. **לוח בקרה ניהולי (Dashboard)**: 
-שליפה וסינון מתקדם של בקשות לפי קריטריונים רבים (עיר, תאריכים, כמות אחים, גובה שכר, מיון דינמי) ועדכון סטטוס הבקשה (ממתין, מאושר, נדחה).
+## Architecture
 
-## ארכיטקטורה ומבנה הנתונים
+### Server: Node.js / Express / MongoDB (Mongoose)
 
-### צד שרת — Node.js / Express & MongoDB (Mongoose)
-* **Models**: 
-  * `User`: ניהול פרטי משתמש (ת"ז, שם פרטי, שם משפחה, סיסמה) עם בדיקות אורך וייחודיות.
-  * `GrantRequest`: סכמה עשירה המכילה אובייקטים מקוננים (personal, family, learn, bank, documents) וסטטוס דינמי (waiting, allow, reject).
+**Models**
 
-* **Controllers & Routes**: 
-  * ניהול נתיבי משתמשים (/users/register, /users/login, /users/all).
-  * ניהול נתיבי בקשות מלגה כולל שמירת קבצים (/requests/add, /requests/all, /requests/not-allowed, /requests/update/:id, /requests/status/:tz).
+- `User`: ID number, first name, last name, password, with length checks and uniqueness.
+- `GrantRequest`: a rich schema with nested objects (`personal`, `family`, `learn`, `bank`, `documents`) and a dynamic status (`waiting`, `allow`, `reject`).
 
-### צד לקוח — React (Redux Toolkit, React Router)
-* **Redux Slices**: 
-ניהול סטייט מרכזי למשתמשים (UserSlice) ולבקשות (RequestSlice).
+**Routes**
 
-* **Components**: 
-מסכי בית (Home), התחברות (Login), טופס בקשה רב-שלבי (NewQuestion / MultyForm) וחלקי טופס מודולריים (פרטים אישיים, משפחה, לימודים, בנק, העלאת קבצים והצהרה).
+- Users: `/users/register`, `/users/login`, `/users/all`
+- Requests (including file storage): `/requests/add`, `/requests/all`, `/requests/not-allowed`, `/requests/update/:id`, `/requests/status/:tz`
 
-* **UI/UX**: 
-עיצוב מודרני מותאם לימין-לשמאל (RTL) עם התראות אינטראקטיביות (SweetAlert).
+### Client: React (Redux Toolkit, React Router)
 
-## פיצ'רים עיקריים
+- **Redux slices:** central state for users (`UserSlice`) and requests (`RequestSlice`).
+- **Components:** Home, Login, the multi-step request form (`NewQuestion` / `MultyForm`), and modular form parts (personal, family, study, bank, file upload, declaration).
+- **UI/UX:** modern right-to-left (RTL) design with interactive alerts (SweetAlert2).
 
-- **אבטחה ובדיקות תקינות**: 
-מניעת כפילות של תעודות זהות במסד הנתונים וניהול שגיאות מפורט בצד השרת ובצד הלקוח.
+## Key Features
 
-- **אחסון קבצים (File Uploads)**: 
-שימוש ב-Multer לשמירת סריקות תעודת זהות, אישורי לימודים ואישורי בנק בשרת.
+- **Validation and safety checks:** duplicate ID numbers are blocked in the database, with detailed error handling on both server and client.
+- **File uploads:** Multer stores ID scans, study confirmations and bank confirmations on the server.
+- **Advanced admin filtering and sorting:** multiple parameters such as salary range, city and number of siblings under 18.
+- **Session hygiene:** the current request in Redux is reset when a new user logs in, preventing personal data from leaking between users on a shared computer.
 
-- **סינון ומיון מתקדם למנהלים**: 
-אפשרות לסנן בקשות לפי פרמטרים מרובים (כגון טווח שכר, עיר מגורים, כמות אחים מתחת לגיל 18) ומיון דינמי.
+## Tech Stack
 
-- **ניהול Session חכם**: 
-איפוס הבקשה הנוכחית ב-Redux בעת כניסת משתמש חדש, למניעת דליפת פרטים אישיים בין משתמשים שונים על אותו מחשב.
-
-## טכנולוגיות
-
-| שכבה | טכנולוגיה |
+| Area | Technology |
 |---|---|
 | Backend | Node.js, Express.js, Mongoose, Multer |
 | Frontend | React, Redux Toolkit, React Router, SweetAlert2 |
-| DB | MongoDB |
-| Styling | CSS מותאם אישית (RTL, עיצוב רספונסיבי ומודרני) |
+| Database | MongoDB |
+| Styling | Custom CSS (RTL, responsive) |
 
-## הרצה מקומית
+## Getting Started
 
-1. ודא/י שמותקן Node.js במחשב והגדר/י את חיבור מסד הנתונים MongoDB.
+1. Make sure Node.js is installed and MongoDB is configured.
+2. Start the server from the server folder: `npm install`, then `npm start`.
+3. In the client folder, run `npm install`, then `npm start`.
 
-2. הרצת השרת באמצעות הרצת הפקודה: 
-   `npm start`
+## What I Learned
 
-3. מעבר לתיקיית הלקוח, התקנת תלויות באמצעות הפקודה: 
-   `npm install`
-
-4. הפעלת הלקוח באמצעות הרצת הפקודה: 
-   `npm start`
+<!-- Add 2-3 lines of your own, e.g. designing the multi-step form state, handling file uploads, building admin filters -->
