@@ -57,6 +57,4 @@ Students submit tech scholarship requests and follow their approval. Administrat
 2. Start the server from the server folder: `npm install`, then `npm start`.
 3. In the client folder, run `npm install`, then `npm start`.
 
-## What I Learned
 
-<!-- Add 2-3 lines of your own, e.g. designing the multi-step form state, handling file uploads, building admin filters -->
